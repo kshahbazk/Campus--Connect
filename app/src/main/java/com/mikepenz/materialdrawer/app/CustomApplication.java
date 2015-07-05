@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
+import com.parse.Parse;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -17,7 +18,7 @@ public class CustomApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        Parse.initialize(this, "UL7usomzdY56M2msYNstwXh2kFRrezPS3aiOobfE", "DSP8b3pIXF3rtzJIfG3n1ZYHjWjHOSP3lPaYvf0Z");
         //initialize and create the image loader logic
         DrawerImageLoader.init(new DrawerImageLoader.IDrawerImageLoader() {
             @Override
