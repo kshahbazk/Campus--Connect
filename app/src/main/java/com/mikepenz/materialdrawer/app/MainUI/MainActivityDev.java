@@ -1,7 +1,6 @@
-package com.mikepenz.materialdrawer.app;
+package com.mikepenz.materialdrawer.app.MainUI;
 
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +16,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.app.R;
 import com.mikepenz.materialdrawer.app.utils.SystemUtils;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
@@ -32,7 +32,10 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.model.interfaces.OnCheckedChangeListener;
 import com.mikepenz.octicons_typeface_library.Octicons;
 
-public class EmbeddedDrawerActivity extends AppCompatActivity {
+/**
+ * Created by shahbazkhan on 11/18/15.
+ */
+public class MainActivityDev extends AppCompatActivity {
     private static final int PROFILE_SETTING = 1;
 
     //save our header or result
@@ -54,12 +57,9 @@ public class EmbeddedDrawerActivity extends AppCompatActivity {
 
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the com.mikepenz.materialdrawer.app.CustomApplication for more details
-        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460");
-        final IProfile profile2 = new ProfileDrawerItem().withName("Bernat Borras").withEmail("alorma@github.com").withIcon(Uri.parse("https://avatars3.githubusercontent.com/u/887462?v=3&s=460"));
-        final IProfile profile3 = new ProfileDrawerItem().withName("Max Muster").withEmail("max.mustermann@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile2));
-        final IProfile profile4 = new ProfileDrawerItem().withName("Felix House").withEmail("felix.house@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile3));
-        final IProfile profile5 = new ProfileDrawerItem().withName("Mr. X").withEmail("mister.x.super@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile4)).withIdentifier(4);
-        final IProfile profile6 = new ProfileDrawerItem().withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile5));
+        final IProfile profile = new ProfileDrawerItem().withName("Shahbaz Khan").withEmail("bayman1x@gmail.com")
+                .withIcon("http://www.reshareit.com/wp-content/uploads/John-Abraham3.jpg");
+
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
@@ -68,14 +68,11 @@ public class EmbeddedDrawerActivity extends AppCompatActivity {
                 .withTranslucentStatusBar(false)
                 .addProfiles(
                         profile,
-                        profile2,
-                        profile3,
-                        profile4,
-                        profile5,
-                        profile6,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(GoogleMaterial.Icon.gmd_add).withIdentifier(PROFILE_SETTING),
-                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account")
+                                .withIcon(GoogleMaterial.Icon.gmd_add).withIdentifier(PROFILE_SETTING),
+                        new ProfileSettingDrawerItem().withName("Manage Account")
+                                .withIcon(GoogleMaterial.Icon.gmd_settings)
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -83,7 +80,8 @@ public class EmbeddedDrawerActivity extends AppCompatActivity {
                         //sample usage of the onProfileChanged listener
                         //if the clicked item has the identifier 1 add a new profile ;)
                         if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile5));
+                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman")
+                                    .withEmail("batman@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile5));
                             if (headerResult.getProfiles() != null) {
                                 //we know that there are 2 setting elements. set the new profile above them ;)
                                 headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
@@ -110,14 +108,20 @@ public class EmbeddedDrawerActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_action_bar).withIcon(FontAwesome.Icon.faw_home),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_multi_drawer).withIcon(FontAwesome.Icon.faw_gamepad),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_non_translucent_status_drawer).withIcon(FontAwesome.Icon.faw_eye),
-                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_complex_header_drawer).withIcon(GoogleMaterial.Icon.gmd_adb),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_simple_fragment_drawer).withIcon(GoogleMaterial.Icon.gmd_style),
+                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_complex_header_drawer)
+                                .withIcon(GoogleMaterial.Icon.gmd_adb),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_simple_fragment_drawer)
+                                .withIcon(GoogleMaterial.Icon.gmd_style),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(GoogleMaterial.Icon.gmd_format_color_fill).withTag("Bullhorn"),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source)
+                                .withIcon(FontAwesome.Icon.faw_github),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact)
+                                .withIcon(GoogleMaterial.Icon.gmd_format_color_fill).withTag("Bullhorn"),
                         new DividerDrawerItem(),
-                        new SwitchDrawerItem().withName("Switch").withIcon(Octicons.Icon.oct_tools).withChecked(true).withOnCheckedChangeListener(onCheckedChangeListener),
-                        new ToggleDrawerItem().withName("Toggle").withIcon(Octicons.Icon.oct_tools).withChecked(true).withOnCheckedChangeListener(onCheckedChangeListener)
+                        new SwitchDrawerItem().withName("Switch").withIcon(Octicons.Icon.oct_tools)
+                                .withChecked(true).withOnCheckedChangeListener(onCheckedChangeListener),
+                        new ToggleDrawerItem().withName("Toggle").withIcon(Octicons.Icon.oct_tools)
+                                .withChecked(true).withOnCheckedChangeListener(onCheckedChangeListener)
                 ) // add the items we want to use with our Drawer
                 .withSavedInstance(savedInstanceState);
 
